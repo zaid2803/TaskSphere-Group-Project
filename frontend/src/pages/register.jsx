@@ -13,109 +13,115 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
   const handleRegister = (e) => {
     e.preventDefault();
 
-    setError("");
-
-    if (!fullName || !email || !password || !confirmPassword) {
-      setError("Please fill all fields.");
-      return;
-    }
-
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      alert("Passwords do not match.");
       return;
     }
 
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 1500);
+    alert("Registration Successful!");
+    navigate("/");
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
 
-        <h1>Create Account</h1>
+        <h1 className="logo">TaskSphere</h1>
 
         <p className="subtitle">
-          Register for TaskSphere
+          Create your account to get started.
         </p>
 
         <form onSubmit={handleRegister}>
 
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-          />
+          <div className="form-group">
+            <label>Full Name</label>
 
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <div className="password-container">
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="text"
+              placeholder="Enter your full name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
             />
-
-            <span
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </span>
           </div>
 
-          <div className="password-container">
+          <div className="form-group">
+            <label>Email Address</label>
+
             <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-
-            <span
-              className="toggle-password"
-              onClick={() =>
-                setShowConfirmPassword(!showConfirmPassword)
-              }
-            >
-              {showConfirmPassword ? "🙈" : "👁"}
-            </span>
           </div>
 
-          {error && (
-            <p className="error-message">{error}</p>
-          )}
+          <div className="form-group">
+            <label>Password</label>
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Creating Account..." : "Register"}
+            <div className="password-wrapper">
+
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+
+              <button
+                type="button"
+                className="eye-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Confirm Password</label>
+
+            <div className="password-wrapper">
+
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+
+              <button
+                type="button"
+                className="eye-btn"
+                onClick={() =>
+                  setShowConfirmPassword(!showConfirmPassword)
+                }
+              >
+                {showConfirmPassword ? "Hide" : "Show"}
+              </button>
+
+            </div>
+          </div>
+
+          <button className="login-btn" type="submit">
+            Create Account
           </button>
 
         </form>
 
-        <p className="register-link">
-          Already have an account?{" "}
-          <Link to="/">Login</Link>
+        <div className="divider"></div>
+
+        <p className="register">
+          Already have an account?
+          <Link to="/"> Sign In</Link>
         </p>
 
       </div>

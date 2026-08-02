@@ -9,91 +9,90 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    setError("");
-
-    if (!email.trim() || !password.trim()) {
-      setError("Please enter email and password.");
-      return;
-    }
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-
-      console.log({
-        email,
-        password,
-        rememberMe,
-      });
-
-      navigate("/dashboard");
-    }, 1500);
+    navigate("/dashboard");
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1>TaskSphere</h1>
+
+        <h1 className="logo">TaskSphere</h1>
 
         <p className="subtitle">
-          Welcome back! Login to manage your tasks.
+          Welcome back! Sign in to continue.
         </p>
 
         <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
 
-          <div className="password-container">
+          <div className="form-group">
+            <label>Email Address</label>
+
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-
-            <span
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </span>
           </div>
 
-          <div className="remember-container">
-            <label>
+          <div className="form-group">
+            <label>Password</label>
+
+            <div className="password-wrapper">
+
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+
+              <button
+                type="button"
+                className="eye-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+
+            </div>
+          </div>
+
+          <div className="options">
+
+            <label className="remember">
               <input
                 type="checkbox"
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              Remember Me
+              Remember me
             </label>
+
+            <a href="#" className="forgot">
+              Forgot Password?
+            </a>
+
           </div>
 
-          {error && <p className="error-message">{error}</p>}
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button className="login-btn" type="submit">
+            Sign In
           </button>
+
         </form>
 
-        <p className="register-link">
-          Don't have an account?{" "}
-          <Link to="/register">Register</Link>
+        <div className="divider"></div>
+
+        <p className="register">
+          Don't have an account?
+          <Link to="/register"> Create Account</Link>
         </p>
+
       </div>
     </div>
   );
