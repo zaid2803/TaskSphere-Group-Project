@@ -9,10 +9,32 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+
+    setError("");
+
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter email and password.");
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      console.log({
+        email,
+        password,
+        rememberMe,
+      });
+
+      navigate("/dashboard");
+    }, 1500);
   };
 
   return (
@@ -39,6 +61,7 @@ function Login() {
             />
           </div>
 
+
           <div className="form-group">
             <label>Password</label>
 
@@ -63,6 +86,7 @@ function Login() {
             </div>
           </div>
 
+
           <div className="options">
 
             <label className="remember">
@@ -71,8 +95,10 @@ function Login() {
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
+
               Remember me
             </label>
+
 
             <a href="#" className="forgot">
               Forgot Password?
@@ -80,18 +106,34 @@ function Login() {
 
           </div>
 
-          <button className="login-btn" type="submit">
-            Sign In
+
+          {error && (
+            <p className="error-message">
+              {error}
+            </p>
+          )}
+
+
+          <button
+            className="login-btn"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Sign In"}
           </button>
+
 
         </form>
 
+
         <div className="divider"></div>
+
 
         <p className="register">
           Don't have an account?
           <Link to="/register"> Create Account</Link>
         </p>
+
 
       </div>
     </div>
