@@ -1,0 +1,47 @@
+version: 2.1
+
+jobs:
+  backend:
+    docker:
+      - image: cimg/python:3.12
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Backend Dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
+      - run:
+          name: Django System Check
+          command: |
+            python manage.py check
+
+  frontend:
+    docker:
+      - image: cimg/node:20.19
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+
+      - run:
+          name: Go to frontend
+          command: cd frontend && npm install
+
+      - run:
+          name: Build React App
+          command: cd frontend && npm run build
+
+workflows:
+  version: 2
+
+  build_and_test:
+    jobs:
+      - backend
+      - frontend
