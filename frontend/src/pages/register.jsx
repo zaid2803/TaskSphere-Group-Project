@@ -12,14 +12,17 @@ function Register() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
+  setError("Passwords do not match.");
+  return;
+}
+
+setError("");
 
     alert("Registration Successful!");
     navigate("/");
@@ -110,7 +113,11 @@ function Register() {
 
             </div>
           </div>
-
+{error && (
+  <p className="error-message">
+    {error}
+  </p>
+)}
           <button className="login-btn" type="submit">
             Create Account
           </button>
