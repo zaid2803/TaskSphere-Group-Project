@@ -12,14 +12,17 @@ function Register() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
+  setError("Passwords do not match.");
+  return;
+}
+
+setError("");
 
     alert("Registration Successful!");
     navigate("/");
@@ -38,9 +41,9 @@ function Register() {
         <form onSubmit={handleRegister}>
 
           <div className="form-group">
-            <label>Full Name</label>
-
+           <label htmlFor="fullName">Full Name</label>
             <input
+              id="fullName"
               type="text"
               placeholder="Enter your full name"
               value={fullName}
@@ -50,23 +53,22 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label>Email Address</label>
+           <label htmlFor="register-email">Email Address</label>
 
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
+<input
+  id="register-email"
+  type="email"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  required
+/>
+            <label htmlFor="register-password">Password</label>
 
             <div className="password-wrapper">
 
               <input
+              id="register-password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Create a password"
                 value={password}
@@ -86,11 +88,12 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label>Confirm Password</label>
+            <label htmlFor="confirm-password">Confirm Password</label>
 
             <div className="password-wrapper">
 
               <input
+               id="confirm-password"
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm your password"
                 value={confirmPassword}
@@ -110,7 +113,11 @@ function Register() {
 
             </div>
           </div>
-
+{error && (
+  <p className="error-message">
+    {error}
+  </p>
+)}
           <button className="login-btn" type="submit">
             Create Account
           </button>

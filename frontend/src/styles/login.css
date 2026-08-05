@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #f4f6f9;
+  background: linear-gradient(135deg, #dbeafe, #f8fafc);
 }
 
 .login-container {
@@ -19,10 +19,13 @@ body {
 
 .login-card {
   width: 420px;
-  background: #ffffff;
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+ border-radius: 18px;
   padding: 40px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 20px 40px rgba(15,23,42,0.15);
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -134,6 +137,8 @@ body {
 
 .login-btn:hover {
   background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37,99,235,0.25);
 }
 
 .divider {
@@ -158,14 +163,34 @@ body {
   text-decoration: underline;
 }
 
+.error-message {
+  color: #dc2626;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 @media (max-width: 480px) {
   .login-card {
     width: 100%;
-    padding: 30px 25px;
+    padding: 24px 20px;
   }
 
   .logo {
-    font-size: 34px;
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .login-btn {
+    font-size: 15px;
+    padding: 12px;
   }
 
   .options {

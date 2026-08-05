@@ -50,24 +50,26 @@ function Login() {
         <form onSubmit={handleLogin}>
 
           <div className="form-group">
-            <label>Email Address</label>
+            <label htmlFor="email">Email Address</label>
 
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+           <input
+  id="email"
+  type="email"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  required
+/>
           </div>
 
 
           <div className="form-group">
-            <label>Password</label>
+           <label htmlFor="password">Password</label>
 
             <div className="password-wrapper">
 
               <input
+              id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password}
