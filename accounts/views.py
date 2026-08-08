@@ -180,3 +180,12 @@ def logout_view(request):
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Task.objects.filter(user=self.request.user)
+
+        return Task.objects.none()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
